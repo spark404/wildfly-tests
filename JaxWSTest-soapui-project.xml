@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="JaxWSTest" resourceRoot="" soapui-version="4.6.4" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="PingImplServiceSoapBinding" type="wsdl" bindingName="{http://jaxws.tests.wildfly.strocamp.net/}PingImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://192.168.56.20:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://192.168.56.20:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl?wsdl"><con:part><con:url>http://192.168.56.20:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="PingImplService" targetNamespace="http://jaxws.tests.wildfly.strocamp.net/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://jaxws.tests.wildfly.strocamp.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://jaxws.tests.wildfly.strocamp.net/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getHelloWorldAsString" type="tns:getHelloWorldAsString"/>
+      <xs:element name="getHelloWorldAsStringResponse" type="tns:getHelloWorldAsStringResponse"/>
+      <xs:complexType name="getHelloWorldAsString">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getHelloWorldAsStringResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getHelloWorldAsStringResponse">
+    <wsdl:part element="tns:getHelloWorldAsStringResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getHelloWorldAsString">
+    <wsdl:part element="tns:getHelloWorldAsString" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Ping">
+    <wsdl:operation name="getHelloWorldAsString">
+      <wsdl:input message="tns:getHelloWorldAsString" name="getHelloWorldAsString"></wsdl:input>
+      <wsdl:output message="tns:getHelloWorldAsStringResponse" name="getHelloWorldAsStringResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PingImplServiceSoapBinding" type="tns:Ping">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference URI="#WS-SP-EX223_binding_policy"/>
+    <wsdl:operation name="getHelloWorldAsString">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getHelloWorldAsString">
+        <soap:body use="literal"/>
+        <wsp:PolicyReference URI="#WS-SP-EX223_Binding_Operation_Input_Policy"/>
+      </wsdl:input>
+      <wsdl:output name="getHelloWorldAsStringResponse">
+        <soap:body use="literal"/>
+        <wsp:PolicyReference URI="#WS-SP-EX223_Binding_Operation_Output_Policy"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PingImplService">
+    <wsdl:port binding="tns:PingImplServiceSoapBinding" name="PingImplPort">
+      <soap:address location="http://localhost:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsp:Policy wsu:Id="WS-SP-EX223_binding_policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SymmetricBinding>
+          <wsp:Policy>
+            <sp:ProtectionToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                  <wsp:Policy>
+                    <sp:RequireDerivedKeys/>
+                    <sp:RequireThumbprintReference/>
+                    <sp:WssX509V3Token11/>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:ProtectionToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict/>
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp/>
+            <sp:OnlySignEntireHeadersAndBody/>
+          </wsp:Policy>
+        </sp:SymmetricBinding>
+        <sp:Wss11>
+          <wsp:Policy>
+            <sp:MustSupportRefKeyIdentifier/>
+            <sp:MustSupportRefIssuerSerial/>
+            <sp:MustSupportRefThumbprint/>
+            <sp:MustSupportRefEncryptedKey/>
+            <sp:RequireSignatureConfirmation/>
+          </wsp:Policy>
+        </sp:Wss11>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WS-SP-EX223_Binding_Operation_Input_Policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WS-SP-EX223_Binding_Operation_Output_Policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getHelloWorldAsString" bindingOperationName="getHelloWorldAsString" type="Request-Response" outputName="getHelloWorldAsStringResponse" inputName="getHelloWorldAsString" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.56.20:8080/jaxws-tests-0.0.1-SNAPSHOT/PingImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://jaxws.tests.wildfly.strocamp.net/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <jax:getHelloWorldAsString>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </jax:getHelloWorldAsString>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://jaxws.tests.wildfly.strocamp.net/Ping/getHelloWorldAsString"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>/Users/hugo/Documents/workspace/wildfly-tests/jaxws-tests/clientKeystore.jks</con:source><con:password>cspass</con:password><con:type>KEYSTORE</con:type></con:crypto><con:incoming><con:name>Test</con:name><con:decryptCrypto>clientKeystore.jks</con:decryptCrypto><con:signatureCrypto>clientKeystore.jks</con:signatureCrypto><con:decryptPassword>ckpass</con:decryptPassword></con:incoming><con:outgoing mustUnderstand="false"><con:name>Test</con:name><con:entry type="Encryption" username="myclientkey" password="ckpass"><con:configuration><crypto>clientKeystore.jks</crypto><keyIdentifierType>3</keyIdentifierType><symmetricEncAlgorithm>http://www.w3.org/2001/04/xmlenc#aes256-cbc</symmetricEncAlgorithm><encKeyTransport>http://www.w3.org/2001/04/xmlenc#rsa-1_5</encKeyTransport><embeddedKeyName/><embeddedKeyPassword/><encryptionCanonicalization/><encryptSymmetricKey>true</encryptSymmetricKey><encryptionPart><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="id" value=""/>
+  <con:entry key="name" value=""/>
+  <con:entry key="enc" value="Content"/>
+  <con:entry key="namespace" value=""/>
+</xml-fragment>]]></encryptionPart><encryptionPart>&lt;xml-fragment/></encryptionPart></con:configuration></con:entry><con:entry type="Signature" username="myclientkey" password="ckpass"><con:configuration><crypto>clientKeystore.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm/><signatureCanonicalization/><useSingleCert>true</useSingleCert><digestAlgorithm/></con:configuration></con:entry><con:entry type="Timestamp"><con:configuration/></con:entry></con:outgoing><con:outgoing mustUnderstand="true"><con:name>OutgoingWSS</con:name><con:entry type="Encryption" username="myclientkey" password="ckpass"><con:configuration><crypto>clientKeystore.jks</crypto><keyIdentifierType>0</keyIdentifierType><symmetricEncAlgorithm/><encKeyTransport/><embeddedKeyName/><embeddedKeyPassword/><encryptionCanonicalization/><encryptSymmetricKey>true</encryptSymmetricKey></con:configuration></con:entry><con:entry type="Signature" username="myclientkey" password="ckpass"><con:configuration><crypto>clientKeystore.jks</crypto><keyIdentifierType>0</keyIdentifierType><signatureAlgorithm/><signatureCanonicalization/><useSingleCert>false</useSingleCert><digestAlgorithm/></con:configuration></con:entry><con:entry type="Timestamp"><con:configuration/></con:entry></con:outgoing></con:wssContainer><con:sensitiveInformation/></con:soapui-project>
