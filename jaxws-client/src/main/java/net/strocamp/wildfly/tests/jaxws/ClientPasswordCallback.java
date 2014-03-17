@@ -11,12 +11,12 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import org.apache.log4j.Logger;
 import org.apache.ws.security.WSPasswordCallback;
 
-public class PingPasswordCallback implements CallbackHandler {
-    private final static Logger s_logger = Logger.getLogger(PingPasswordCallback.class);
+public class ClientPasswordCallback implements CallbackHandler {
+    private final static Logger s_logger = Logger.getLogger(ClientPasswordCallback.class);
 
     private Map<String, String> passwords = new HashMap<String, String>();
 
-    public PingPasswordCallback() {
+    public ClientPasswordCallback() {
         passwords.put("myservicekey", "skpass");
         passwords.put("myclientkey", "ckpass");
     }
@@ -29,7 +29,7 @@ public class PingPasswordCallback implements CallbackHandler {
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
-            System.out.println("Requested password for " + pc.getIdentifier());
+            s_logger.debug("Requested password for " + pc.getIdentifier());
 
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {

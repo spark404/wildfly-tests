@@ -18,8 +18,9 @@ public class TestClient {
         service = new PingImplService();
         Ping port = service.getPingImplPort();
         Map<String, Object> ctx = ((BindingProvider)port).getRequestContext();
-        ctx.put("ws-security.encryption.properties", "client.properties");
-        ctx.put("ws-security.encryption.username", "myservicekey");
+        ctx.put("ws-security.encryption.properties", "client-encryption.properties");
+        ctx.put("ws-security.signature.properties", "client-signature.properties");
+        ctx.put("ws-security.callback-handler", "net.strocamp.wildfly.tests.jaxws.ClientPasswordCallback");
         String result = port.getHelloWorldAsString("Hugo");
         System.out.println("Result = " + result);
     }

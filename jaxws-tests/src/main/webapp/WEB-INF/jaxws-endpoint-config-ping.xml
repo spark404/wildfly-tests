@@ -5,11 +5,11 @@
     <config-name>Ping WS-Security Endpoint</config-name>
     <property>
       <property-name>ws-security.signature.properties</property-name>
-      <property-value>ping.properties</property-value>
+      <property-value>ping-signature.properties</property-value>
     </property>
     <property>
       <property-name>ws-security.encryption.properties</property-name>
-      <property-value>ping.properties</property-value>
+      <property-value>ping-encryption.properties</property-value>
     </property>
     <property>
       <property-name>ws-security.callback-handler</property-name>

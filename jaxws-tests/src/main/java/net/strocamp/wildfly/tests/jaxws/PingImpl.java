@@ -6,7 +6,7 @@ import org.jboss.ws.api.annotation.EndpointConfig;
 import org.jboss.ws.api.annotation.PolicySets;
 
 @WebService(endpointInterface = "net.strocamp.wildfly.tests.jaxws.Ping")
-@PolicySets({"WS-SP-EX223_WSS11_Anonymous_X509_Sign_Encrypt"})
+@PolicySets({"WS-SP-EX224_WSS11_Mutual_Auth_X509_Sign_Encrypt"})
 @EndpointConfig(configFile = "WEB-INF/jaxws-endpoint-config-ping.xml")
 public class PingImpl implements Ping {
 
